@@ -20,7 +20,7 @@ def _load_codec_model(device):
 # Loads to torch Encodec model
 def codec_decode(fine_tokens):
     codec = _load_codec_model("cpu")
-    arr = torch.from_numpy(np.array(fine_tokens, copy=False, dtype=np.int32))[None]
+    arr = torch.from_numpy(np.asarray(fine_tokens, dtype=np.int32))[None]
     arr = arr.to("cpu")
     arr = arr.transpose(0, 1)
     emb = codec.quantizer.decode(arr)
